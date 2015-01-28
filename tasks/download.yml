@@ -1,0 +1,19 @@
+---
+  - 
+    name: Download Java
+    command: "curl -L -o {{temp_file}} -k -H '{{oracle_accept_cookie_header}}' {{java_download_url}} creates={{temp_file}}"
+  - 
+    name: Unpack archive
+    unarchive: src="{{temp_file}}" dest="{{download_folder}}" copy=no
+#    args:
+#      chdir: "{{download_folder}}"
+#      creates:"{{java_home}}"
+  - 
+    name: Fix ownership
+    file: state=directory path={{java_home}} owner=root group=root recurse=yes
+  - 
+    name: Make Java available for system
+    command: 'alternatives --install "/usr/bin/java" "java" "{{java_home}}/bin/java" {{alternative_priority}}'
+  #- 
+  #  name: Clean up
+  #  file: state=absent path={{temp_file}}

@@ -1,0 +1,8 @@
+---
+  - name: Check currently installed Java alternative
+    shell: alternatives --display java
+    ignore_errors: True
+    register: alternatives_java
+
+  - include: download.yml
+    when: alternatives_java.stdout.find(java_home) == -1

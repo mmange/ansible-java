@@ -1,3 +1,11 @@
 ---
 # defaults file for java
-accept_cookie_header: 'Cookie: oraclelicense=accept-securebackup-cookie'
+download_folder: /opt
+java_version: 8u31-b13
+java_name: jdk1.8.0_31
+java_download_url: "http://download.oracle.com/otn-pub/java/jdk/{{java_version}}/server-jre-8u31-linux-x64.tar.gz"
+java_archive: "{{java_download_url | basename}}"
+java_home: "{{download_folder}}/{{java_name}}"
+temp_file: "{{download_folder}}/{{java_archive}}"
+oracle_accept_cookie_header: 'Cookie: oraclelicense=accept-securebackup-cookie'
+alternative_priority: 2000
